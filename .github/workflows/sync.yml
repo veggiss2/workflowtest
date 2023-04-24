@@ -25,12 +25,11 @@ jobs:
         persist-credentials: true
         
     - name: Push to destination
-      # if: ${{ vars.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
+      if: ${{ vars.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
       working-directory: dest
       run: |
-        echo ${ vars.DESTINATION_REPOSITORY }
         git config --global user.name "Github Action"
         git config --global user.email "<>"
-        git commit -m "Sync from source ref: ${{ github.ref }}"
+        git commit -m "Sync from source"
         git push
       
