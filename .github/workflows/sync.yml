@@ -7,25 +7,17 @@ jobs:
   push_to_main:
     runs-on: ubuntu-latest
     steps:
-    #- name: Checkout
-    #  uses: actions/checkout@v3
-    #  with:
-    #    path: 'src'
-    #    ref: 'main'
-    #    persist-crendentials: false
     - name: Checkout destination
       uses: actions/checkout@v3
       with:
-        #path: 'dest'
         ref: 'main'
         repository: ${{ vars.DESTINATION_REPOSITORY }}
-        #token: ${{ secrets.BOT_TOKEN }}
+        token: ${{ secrets.BOT_TOKEN }}
         fetch-depth: 0
         persist-credentials: true
         
     - name: Push to destination
       if: ${{ vars.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
-      #working-directory: dest
       run: |
         git config --global user.name "Github Action"
         git config --global user.email "<>"
