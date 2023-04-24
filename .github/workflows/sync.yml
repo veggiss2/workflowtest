@@ -32,9 +32,9 @@ jobs:
         echo "Merge with source: https://github.com/${GITHUB_REPOSITORY}.git"
         git remote add source "https://github.com/${GITHUB_REPOSITORY}.git"
         git fetch source
-        git checkout source main
         echo $(ls)
         echo $(cat README.md)
+        git merge -X source/main
         git commit -m "Sync from source"
         echo "Committing"
         git push --force
