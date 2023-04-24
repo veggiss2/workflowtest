@@ -19,7 +19,7 @@ jobs:
         #path: 'dest'
         ref: 'main'
         repository: ${{ vars.DESTINATION_REPOSITORY }}
-        token: ${{ secrets.BOT_TOKEN }}
+        #token: ${{ secrets.BOT_TOKEN }}
         fetch-depth: 0
         persist-credentials: true
         
