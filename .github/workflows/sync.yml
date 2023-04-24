@@ -1,24 +1,23 @@
+name: Push to main branch
 on:
   push:
     branches:
-    - main
+      - main
 jobs:
-  pull-request:
+  push_to_main:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: pull-request
-      id: open-pr
-      uses: repo-sync/pull-request@v2
-      with:
-        destination_repository: veggiss2/workflowtest
-        destination_branch: "main"
-        github_token: ${{ secrets.VEGGIS2_PAT }}
-    - name: output-url
-      run: echo ${{steps.open-pr.outputs.pr_url}}
-    - name: output-number
-      run: echo ${{steps.open-pr.outputs.pr_number}}
-    - name: output-created
-      run: echo ${{steps.open-pr.outputs.pr_created}}
-    - name: output-has-changed-files
-      run: echo ${{steps.open-pr.outputs.has_changed_files}}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+      - name: Push changes
+        env:
+          PAT: ${{ secrets.VEGGIS2_PAT }}
+        run: |
+          git remote add dest https://github.com/veggiss2/workflowtest.git
+          git fetch dest main
+          git pull dest main
+          git push dest main
