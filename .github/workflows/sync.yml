@@ -1,24 +1,26 @@
-name: Push to main branch
+name: Repo Sync
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  push_to_main:
+  repo-sync:
+    name: Repo Sync
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-      - name: Push changes
-        env:
-          PAT: ${{ secrets.VEGGIS2_PAT }}
-        run: |
-          git remote add dest https://github.com/veggiss2/workflowtest.git
-          git fetch dest main
-          git merge --no-ff --no-commit --allow-unrelated-histories --exclude=.github/* dest/main
-          git commit -m "Merge changes from veggiss/testrepo" || true
-          git push dest main
+    - uses: actions/checkout@v3
+    - uses: repo-sync/github-sync@v2
+      name: Sync repo to branch
+      with:
+        source_repo: veggiss/testrepo
+        source_branch: main
+        destination_branch: main
+        github_token: ${{ secrets.VEGGIS2_PAT }}
+    - uses: repo-sync/pull-request@v2
+      name: Create pull request
+      with:
+        source_branch: repo_sync
+        destination_branch: main
+        github_token: ${{ secrets.VEGGIS2_PAT }}
