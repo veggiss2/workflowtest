@@ -1,29 +1,25 @@
-name: Push to main branch
+name: Repo Sync
+
 on:
-  push:
-    branches:
-      - main
+  schedule: 
+  - cron: "*/5 * * * *" # every 15 minutes. set to whatever interval you like
+
 jobs:
-  push_to_main:
+  repo-sync:
+    name: Repo Sync
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-      - name: Push changes
-        env:
-          PAT: ${{ secrets.VEGGIS2_PAT }}
-        run: |
-          echo "1 remote add dest"
-          git remote add dest https://github.com/veggiss2/workflowtest.git
-          echo "2 fetch dest main"
-          git fetch dest main
-          echo "3 pull dest main"
-          git pull dest main --no-ff --allow-unrelated-histories
-          echo "4 git reset .github"
-          git reset .github/*
-          echo "5 push dest main"
-          git push dest main
+    - uses: actions/checkout@v3
+    - uses: repo-sync/github-sync@v2
+      name: Sync repo to branch
+      with:
+        source_repo: veggiss/testrepo
+        source_branch: main
+        destination_branch: repo-sync
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: repo-sync/pull-request@v2
+      name: Create pull request
+      with:
+        source_branch: repo-sync
+        destination_branch: main
+        github_token: ${{ secrets.GITHUB_TOKEN }}
