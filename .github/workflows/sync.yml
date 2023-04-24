@@ -19,4 +19,4 @@ jobs:
         source_repo: NatuRal3/testSyncPullPush # The owner and repository name of the external repository
         source_branch: main # The name of the branch to pull from the external repository
         destination_branch: main # The name of the branch to merge the external branch into in the current repository
-        token: ${{ secrets.PAT }} # The personal access token used to authenticate with the external repository
+        github_token: ${{ secrets.PAT }} # The personal access token used to authenticate with the external repository
