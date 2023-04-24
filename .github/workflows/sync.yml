@@ -29,12 +29,13 @@ jobs:
       run: |
         echo $(ls)
         echo $(cat README.md)
-        echo $(git remote -v)
         git config --global user.name "Github Action"
         git config --global user.email "<>"
         echo "Merge with source: https://github.com/${GITHUB_REPOSITORY}.git"
-        git remote add source https://github.com/${GITHUB_REPOSITORY}.git
+        git remote add source "https://github.com/${GITHUB_REPOSITORY}.git"
         git merge source/main
+        echo $(git remote -v)
         git commit -m "Sync from source"
+        echo "Committing"
         git push
       
