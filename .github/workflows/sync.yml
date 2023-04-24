@@ -20,5 +20,6 @@ jobs:
           git remote add dest https://github.com/veggiss2/workflowtest.git
           git fetch dest main
           git merge --no-ff --allow-unrelated-histories dest/main
+          git reset .github
           git commit -m "Merge changes from veggiss/testrepo" || true
           git push dest main
