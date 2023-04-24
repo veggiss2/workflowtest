@@ -1,4 +1,6 @@
 name: Push to main branch
+env:
+  DESTINATION_REPOSITORY: ${{ env.DESTINATION_REPOSITORY }}
 on:
   push:
     branches:
