@@ -21,11 +21,7 @@ jobs:
         run: |
           echo "1 remote add dest"
           git remote add dest https://github.com/veggiss2/workflowtest.git
-          echo "2 fetch dest main"
-          git fetch dest main
-          echo "3 pull dest main"
+          echo "2 pull dest main"
           git pull dest main --no-ff --allow-unrelated-histories
-          echo "4 git reset .github"
-          git reset .github/*
-          echo "5 push dest main"
+          echo "3 push dest main"
           git push dest main
