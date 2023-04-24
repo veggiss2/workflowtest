@@ -25,7 +25,7 @@ jobs:
         persist-credentials: true
         
     - name: Push to destination
-      if: ${{ env.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
+      # if: ${{ env.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
       working-directory: dest
       run: |
         echo $env.DESTINATION_REPOSITORY
