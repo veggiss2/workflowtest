@@ -2,16 +2,16 @@ on:
   push:
     branches:
     - main
-
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: "veggiss2/workflowtest"
+        repository: veggiss2/workflowtest
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        destination_branch: "main"
+        destination_branch: main
         github_token: ${{ secrets.VEGGIS2_PAT }}
+        destination_repository: veggiss2/workflowtest
