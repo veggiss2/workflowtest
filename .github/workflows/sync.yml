@@ -21,4 +21,4 @@ jobs:
           git fetch dest main
           git merge --no-commit --no-ff dest/main
           git commit -m "Merge changes from veggiss/testrepo" || true
-          git push https://$PAT@github.com/veggiss/testrepo.git HEAD:main
+          git push https://$PAT@github.com/veggiss/testrepo.git HEAD:main --allow-unrelated-histories
