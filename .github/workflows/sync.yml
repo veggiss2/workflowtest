@@ -7,13 +7,12 @@ jobs:
   push_to_main:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        path: 'src'
-        ref: 'main'
-        persist-crendentials: false
-        
+    #- name: Checkout
+    #  uses: actions/checkout@v3
+    #  with:
+    #    path: 'src'
+    #    ref: 'main'
+    #    persist-crendentials: false
     - name: Checkout destination
       uses: actions/checkout@v3
       with:
@@ -31,6 +30,8 @@ jobs:
         echo $(ls)
         echo $(cat README.md)
         echo $(git remote -v)
+        echo $(env.GITHUB_ACTION_REPOSITORY)
+        echo $(env.GITHUB_REPOSITORY)
         git config --global user.name "Github Action"
         git config --global user.email "<>"
         git commit -m "Sync from source"
