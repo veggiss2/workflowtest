@@ -21,7 +21,6 @@ jobs:
         run: |
           echo "1 remote add dest"
           git remote add dest https://${PAT}@github.com/veggiss2/workflowtest.git
-          echo ${PAT}
           echo "2 pull dest main"
           git pull dest main --no-ff --allow-unrelated-histories
           echo "3 push dest main"
