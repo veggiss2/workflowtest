@@ -14,9 +14,9 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Pull from External Branch # Pull the external branch into the current repository
-      uses: repo-sync/pull-repo@v2 # Use the repo-sync/pull-repo action
+      uses: repo-sync/github-sync@v2 # Use the repo-sync/pull-repo action
       with:
         source_repo: NatuRal3/testSyncPullPush # The owner and repository name of the external repository
         source_branch: main # The name of the branch to pull from the external repository
-        target_branch: main # The name of the branch to merge the external branch into in the current repository
+        destination_branch: main # The name of the branch to merge the external branch into in the current repository
         token: ${{ secrets.PAT }} # The personal access token used to authenticate with the external repository
