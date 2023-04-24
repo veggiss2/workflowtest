@@ -6,20 +6,17 @@ on:
 jobs:
   push_to_main:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
     - run: |
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
         echo "1. remote add dest"
-        git remote add dest https://veggiss:$token@github.com/veggiss2/workflowtest.git
+        git remote add dest https://$token@github.com/veggiss2/workflowtest.git
         echo $(git remote -v)
         echo "2. fetch"
         git fetch dest
         echo "2. merge dest main"
         git merge --allow-unrelated-histories dest/main
         echo "3. push dest main"
-        git config --unset-all http.https://github.com/.extraheader
         git push dest main
