@@ -7,16 +7,35 @@ jobs:
   push_to_main:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-        echo "1. remote add dest"
-        git remote add dest https://$token@github.com/veggiss2/workflowtest.git
+    #- name: Checkout
+    #  uses: actions/checkout@v3
+    #  with:
+    #    path: 'src'
+    #    ref: 'main'
+    #    persist-crendentials: false
+    - name: Checkout destination
+      uses: actions/checkout@v3
+      with:
+        #path: 'dest'
+        ref: 'main'
+        repository: ${{ vars.DESTINATION_REPOSITORY }}
+        token: ${{ secrets.BOT_TOKEN }}
+        fetch-depth: 0
+        persist-credentials: true
+        
+    - name: Push to destination
+      if: ${{ vars.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
+      #working-directory: dest
+      run: |
+        echo $(ls)
+        echo $(cat README.md)
+        git config --global user.name "Github Action"
+        git config --global user.email "<>"
+        echo "Merge with source: https://github.com/${GITHUB_REPOSITORY}.git"
+        git remote add source "https://github.com/${GITHUB_REPOSITORY}.git"
+        git fetch source
+        git merge source/main
         echo $(git remote -v)
-        echo "2. fetch"
-        git fetch dest
-        echo "2. merge dest main"
-        git merge --allow-unrelated-histories dest/main
-        echo "3. push dest main"
-        git push dest main
+        git commit -m "Sync from source"
+        echo "Committing"
+        git push
