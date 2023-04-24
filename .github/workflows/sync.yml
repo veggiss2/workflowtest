@@ -19,15 +19,16 @@ jobs:
       with:
         path: 'dest'
         ref: 'main'
-        repository: ${{ DESTINATION_REPOSITORY }}
+        repository: ${{ env.DESTINATION_REPOSITORY }}
         token: ${{ secrets.BOT_TOKEN }}
         fetch-depth: 0
         persist-credentials: true
         
     - name: Push to destination
-      if: ${{ DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
+      if: ${{ env.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
       working-directory: dest
       run: |
+        echo $env.DESTINATION_REPOSITORY
         git config --global user.name "Github Action"
         git config --global user.email "<>"
         git commit -m "Sync from source ref: ${{ github.ref }}"
