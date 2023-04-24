@@ -17,15 +17,8 @@ jobs:
         env:
           PAT: ${{ secrets.VEGGIS2_PAT }}
         run: |
-          echo "remote add dest"
           git remote add dest https://github.com/veggiss2/workflowtest.git
-          echo "fetch dest main"
           git fetch dest main
-          echo "merge --no-ff --no-commit"
           git merge --no-ff --no-commit --allow-unrelated-histories dest/main
-          echo "reset .github/*"
-          git reset .github/*
-          echo "commit"
           git commit -m "Merge changes from veggiss/testrepo" || true
-          echo "push"
           git push dest main
