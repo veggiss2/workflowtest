@@ -22,4 +22,4 @@ jobs:
       with:
         source_branch: repo-sync
         destination_branch: main
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PAT }}
