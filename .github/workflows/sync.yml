@@ -34,7 +34,5 @@ jobs:
         git merge -X theirs source/main
         echo $(ls)
         echo $(cat README.md)
-        git commit -m "Sync from source"
-        echo "Committing"
         git push
       
