@@ -33,6 +33,7 @@ jobs:
         git config --global user.email "<>"
         echo "Merge with source: https://github.com/${GITHUB_REPOSITORY}.git"
         git remote add source "https://github.com/${GITHUB_REPOSITORY}.git"
+        git fetch source
         git merge source/main
         echo $(git remote -v)
         git commit -m "Sync from source"
