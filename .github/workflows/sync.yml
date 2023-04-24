@@ -12,6 +12,6 @@ jobs:
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        destination_branch: main
+        destination_branch: sync-repo
         github_token: ${{ secrets.VEGGIS2_PAT }}
         destination_repository: veggiss2/workflowtest
