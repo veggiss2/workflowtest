@@ -21,4 +21,5 @@ jobs:
         echo "2. merge dest main"
         git merge --allow-unrelated-histories dest/main
         echo "3. push dest main"
+        git config --unset-all http.https://github.com/.extraheader
         git push dest main
