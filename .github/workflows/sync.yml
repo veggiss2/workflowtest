@@ -30,10 +30,11 @@ jobs:
         echo $(ls)
         echo $(cat README.md)
         echo $(git remote -v)
-        echo "GITHUB_ACTION_REPOSITORY: ${GITHUB_ACTION_REPOSITORY}"
-        echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
         git config --global user.name "Github Action"
         git config --global user.email "<>"
+        echo "Merge with source: "https://github.com/${GITHUB_REPOSITORY}"
+        git remote add source "https://github.com/${GITHUB_REPOSITORY}"
+        git merge source/main
         git commit -m "Sync from source"
         git push
       
