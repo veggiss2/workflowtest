@@ -14,9 +14,9 @@ jobs:
     - uses: repo-sync/github-sync@v2
       name: Sync repo to branch
       with:
-        source_repo: veggiss/testrepo
+        source_repo: veggiss2/workflowtest
         source_branch: main
-        destination_branch: main
+        destination_branch: repo_sync
         github_token: ${{ secrets.VEGGIS2_PAT }}
     - uses: repo-sync/pull-request@v2
       name: Create pull request
