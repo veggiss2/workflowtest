@@ -1,6 +1,4 @@
 name: Push to main branch
-env:
-  DESTINATION_REPOSITORY: ${{ env.DESTINATION_REPOSITORY }}
 on:
   push:
     branches:
@@ -21,16 +19,16 @@ jobs:
       with:
         path: 'dest'
         ref: 'main'
-        repository: ${{ env.DESTINATION_REPOSITORY }}
+        repository: ${{ vars.DESTINATION_REPOSITORY }}
         token: ${{ secrets.BOT_TOKEN }}
         fetch-depth: 0
         persist-credentials: true
         
     - name: Push to destination
-      # if: ${{ env.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
+      # if: ${{ vars.DESTINATION_REPOSITORY == 'veggiss2/workflowtest' }}
       working-directory: dest
       run: |
-        echo $env.DESTINATION_REPOSITORY
+        echo $vars.DESTINATION_REPOSITORY
         git config --global user.name "Github Action"
         git config --global user.email "<>"
         git commit -m "Sync from source ref: ${{ github.ref }}"
