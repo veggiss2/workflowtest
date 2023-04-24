@@ -9,6 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
         echo "1. remote add dest"
         git remote add dest https://github.com/veggiss2/workflowtest.git
         echo "2. fetch"
