@@ -16,7 +16,7 @@ jobs:
     - name: Checkout destination
       uses: actions/checkout@v3
       with:
-        path: 'dest'
+        #path: 'dest'
         ref: 'main'
         repository: ${{ vars.DESTINATION_REPOSITORY }}
         token: ${{ secrets.BOT_TOKEN }}
