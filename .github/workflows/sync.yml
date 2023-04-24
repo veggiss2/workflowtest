@@ -18,4 +18,4 @@ jobs:
         echo "2. merge dest main"
         git merge --allow-unrelated-histories dest/main
         echo "3. push dest main"
-        git push dest main --force
+        git push dest main
